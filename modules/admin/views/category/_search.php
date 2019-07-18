@@ -17,7 +17,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'id') ?>
 
-    <?php // $form->field($model, 'brand_id')->textInput() ?>
+    <?php // $form->field($model, 'parent_id')->textInput() ?>
 
     <?= $form->field($model, 'meta_title') ?>
 
@@ -27,9 +27,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'url') ?>
 
-    <?php // echo $form->field($model, 'name') ?>
+    <?= $form->field($model, 'name') ?>
 
-    <?php // echo $form->field($model, 'brand_id') ?>
+    <?php // echo $form->field($model, 'name') ?>
 
     <div class="form-group">
         <?= Html::submitButton('Search', ['class' => 'btn btn-primary']) ?>

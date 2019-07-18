@@ -15,8 +15,6 @@ use Yii;
  * @property string $content
  * @property string $name
  * @property string $image
- * @property int $category_id
- * @property int $product_id
  */
 class Promotions extends \yii\db\ActiveRecord
 {
@@ -35,7 +33,6 @@ class Promotions extends \yii\db\ActiveRecord
     {
         return [
             [['meta_description', 'url', 'content', 'name'], 'string'],
-            [['category_id', 'product_id'], 'integer'],
             [['meta_title', 'title', 'image'], 'string', 'max' => 255],
         ];
     }
@@ -54,8 +51,6 @@ class Promotions extends \yii\db\ActiveRecord
             'content' => 'Content',
             'name' => 'Name',
             'image' => 'Image',
-            'category_id' => 'Category ID',
-            'product_id' => 'Product ID',
         ];
     }
 }

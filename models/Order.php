@@ -10,9 +10,14 @@ use Yii;
  * @property int $id
  * @property string $name
  * @property string $surname
+ * @property string $email
  * @property string $telephone
  * @property string $payment
- * @property string $delivery
+ * @property string $delivery_id
+ * @property string $products
+ * @property string $comments
+ * @property string $status_id
+ * @property string $date_create
  */
 class Order extends \yii\db\ActiveRecord
 {
@@ -30,8 +35,9 @@ class Order extends \yii\db\ActiveRecord
     public function rules()
     {
         return [
-            [['payment', 'delivery'], 'string'],
-            [['name', 'surname', 'telephone'], 'string', 'max' => 255],
+            [['payment', 'products', 'comments'], 'string'],
+            [['delivery_id', 'status_id', 'date_create'], 'integer'],
+            [['name', 'surname', 'email', 'telephone'], 'string', 'max' => 255],
         ];
     }
 
@@ -44,9 +50,14 @@ class Order extends \yii\db\ActiveRecord
             'id' => 'ID',
             'name' => 'Name',
             'surname' => 'Surname',
+            'email' => 'Email',
             'telephone' => 'Telephone',
             'payment' => 'Payment',
-            'delivery' => 'Delivery',
+            'delivery_id' => 'Delivery ID',
+            'products' => 'Products',
+            'comments' => 'Comments',
+            'status_id' => 'Status ID',
+            'date_create' => 'Date Create',
         ];
     }
 }

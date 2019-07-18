@@ -28,9 +28,9 @@ $this->params['breadcrumbs'][] = $this->title;
 
             'id',
             'meta_title',
-            'title',
+            'name',
             'meta_description:ntext',
-            'content:ntext',
+            //'content:ntext',
             //'date',
             //'image',
             //'price:ntext',
@@ -39,8 +39,9 @@ $this->params['breadcrumbs'][] = $this->title;
             //'product_id',
             //'status',
             //'promotions_id',
-            //'category_id',
-            //'brand_id',
+            'category_id',
+            'brand_id',
+            //'new_price',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

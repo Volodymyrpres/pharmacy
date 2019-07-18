@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Product;
 use Yii;
 use yii\filters\AccessControl;
 use yii\web\Controller;
@@ -9,6 +10,7 @@ use yii\web\Response;
 use yii\filters\VerbFilter;
 use app\models\LoginForm;
 use app\models\ContactForm;
+use app\models\Brand;
 
 class SiteController extends Controller
 {
@@ -61,7 +63,13 @@ class SiteController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $brands = Brand::find()->all();
+        $popular = Product::find()->where(['product_id' => '1'])->limit(6)->all();
+
+        return $this->render('index', [
+            'brands' => $brands,
+            'popular' => $popular,
+        ]);
     }
 
     /**
@@ -125,4 +133,8 @@ class SiteController extends Controller
     {
         return $this->render('about');
     }
+
+
+
+
 }

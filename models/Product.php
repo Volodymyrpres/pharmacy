@@ -9,7 +9,7 @@ use Yii;
  *
  * @property int $id
  * @property string $meta_title
- * @property string $title
+ * @property string $name
  * @property string $meta_description
  * @property string $content
  * @property string $date
@@ -22,6 +22,7 @@ use Yii;
  * @property int $promotions_id
  * @property int $category_id
  * @property int $brand_id
+ * @property int new_price
  *
  * @property Comment[] $comments
  */
@@ -43,8 +44,8 @@ class Product extends \yii\db\ActiveRecord
         return [
             [['meta_description', 'content', 'price', 'article', 'url'], 'string'],
             [['date'], 'safe'],
-            [['product_id', 'status', 'promotions_id', 'category_id', 'brand_id'], 'integer'],
-            [['meta_title', 'title', 'image'], 'string', 'max' => 255],
+            [['product_id', 'status', 'promotions_id', 'category_id', 'brand_id', 'new_price'], 'integer'],
+            [['meta_title', 'name', 'image'], 'string', 'max' => 255],
         ];
     }
 
@@ -56,7 +57,7 @@ class Product extends \yii\db\ActiveRecord
         return [
             'id' => 'ID',
             'meta_title' => 'Meta Title',
-            'title' => 'Title',
+            'name' => 'Name',
             'meta_description' => 'Meta Description',
             'content' => 'Content',
             'date' => 'Date',
@@ -69,6 +70,7 @@ class Product extends \yii\db\ActiveRecord
             'promotions_id' => 'Promotions ID',
             'category_id' => 'Category ID',
             'brand_id' => 'Brand ID',
+            'new_price' => 'New Price',
         ];
     }
 
@@ -79,4 +81,13 @@ class Product extends \yii\db\ActiveRecord
     {
         return $this->hasMany(Comment::className(), ['product_id' => 'id']);
     }
+
+    public function getCategory() {
+        return $this->hasOne(Category::className(), ['id' => 'category_id']);
+    }
+
+    public function getBrand() {
+        return $this->hasOne(Brand::className(), ['id' => 'brand_id']);
+    }
+
 }

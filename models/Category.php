@@ -14,7 +14,6 @@ use Yii;
  * @property string $meta_description
  * @property string $url
  * @property string $name
- * @property int $brand_id
  */
 class Category extends \yii\db\ActiveRecord
 {
@@ -33,7 +32,7 @@ class Category extends \yii\db\ActiveRecord
     {
         return [
             [['meta_description', 'url', 'name'], 'string'],
-            [['brand_id', 'parent_id'], 'integer'],
+            [['parent_id'], 'integer'],
             [['meta_title', 'title'], 'string', 'max' => 255],
         ];
     }
@@ -51,12 +50,17 @@ class Category extends \yii\db\ActiveRecord
             'meta_description' => 'Meta Description',
             'url' => 'Url',
             'name' => 'Name',
-            'brand_id' => 'Brand ID',
         ];
     }
 
     public function getArticles()
     {
         return $this->hasMany(Article::className(), ['category_id' =>'id']);
+    }
+
+
+
+    public function getProducts() {
+        return $this->hasMany(Product::className(), ['category_id' => 'id']);
     }
 }

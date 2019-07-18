@@ -40,9 +40,13 @@ AppAsset::register($this);
         'items' => [
             ['label' => 'Home', 'url' => ['/admin/default/index']],
             ['label' => 'Articles', 'url' => ['/admin/article/index']],
-            ['label' => 'Categories', 'url' => ['/admin/category/index']],
             ['label' => 'Brands', 'url' => ['/admin/brand/index']],
-            ['label' => 'Products', 'url' => ['/admin/product/index']]
+            ['label' => 'Categories', 'url' => ['/admin/category/index']],
+            ['label' => 'Products', 'url' => ['/admin/product/index']],
+            ['label' => 'Order', 'url' => ['/admin/order/index']],
+            ['label' => 'Promotions', 'url' => ['/admin/promotions/index']],
+            ['label' => 'User', 'url' => ['/admin/user/index']],
+            ['label' => 'Comment', 'url' => ['/admin/comment/index']],
         ],
     ]);
     NavBar::end();

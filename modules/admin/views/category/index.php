@@ -33,7 +33,6 @@ $this->params['breadcrumbs'][] = $this->title;
             //'meta_description:ntext',
             //'url:ntext',
             'name:ntext',
-            //'brand_id',
 
             ['class' => 'yii\grid\ActionColumn'],
         ],

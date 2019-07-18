@@ -4,6 +4,7 @@ namespace app\models;
 
 use Yii;
 
+
 /**
  * This is the model class for table "brand".
  *
@@ -33,7 +34,7 @@ class Brand extends \yii\db\ActiveRecord
     {
         return [
             [['meta_description', 'url', 'content', 'name'], 'string'],
-            [['meta_title', 'title', 'image'], 'string', 'max' => 255],
+            [['meta_title', 'title'], 'string', 'max' => 255],
         ];
     }
 
@@ -53,4 +54,20 @@ class Brand extends \yii\db\ActiveRecord
             'image' => 'Image',
         ];
     }
+
+    public function getProducts()
+    {
+        return $this->hasMany(Product::className(), ['brand_id' =>'id']);
+    }
+
+    public function getProductsCount(){
+
+        return $this->getProducts()->count();
+    }
+
+    public static function getBrands(){
+
+        return Brand::find()->all();
+    }
+
 }

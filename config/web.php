@@ -11,12 +11,51 @@ $config = [
         'admin' => [
             'class' => 'app\modules\admin\Module',
         ],
+        'imagemanager' => [
+            'class' => 'noam148\imagemanager\Module',
+            //set accces rules ()
+            'canUploadImage' => true,
+            'canRemoveImage' => function(){
+                return true;
+            },
+            'deleteOriginalAfterEdit' => false, // false: keep original image after edit. true: delete original image after edit
+            // Set if blameable behavior is used, if it is, callable function can also be used
+            'setBlameableBehavior' => false,
+            //add css files (to use in media manage selector iframe)
+            'cssFiles' => [
+                'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.3/css/font-awesome.min.css',
+            ],
+        ],
     ],
     'aliases' => [
         '@bower' => '@vendor/bower-asset',
         '@npm'   => '@vendor/npm-asset',
     ],
     'components' => [
+        'imagemanager' => [
+            'class' => 'noam148\imagemanager\components\ImageManagerGetPath',
+            //set media path (outside the web folder is possible)
+            'mediaPath' => '/images/media/imagemanager',
+            //path relative web folder. In case of multiple environments (frontend, backend) add more paths
+            'cachePath' =>  ['assets/images', '../../frontend/web/assets/images'],
+            //use filename (seo friendly) for resized images else use a hash
+            'useFilename' => true,
+            //show full url (for example in case of a API)
+            'absoluteUrl' => false,
+            'databaseComponent' => 'db' // The used database component by the image manager, this defaults to the Yii::$app->db component
+        ],
+        'i18n' => [
+            'translations' => [
+                '*' => [
+                    'class' => 'yii\i18n\PhpMessageSource',
+                    'basePath' => '@app/messages', // if advanced application, set @frontend/messages
+                    'sourceLanguage' => 'en',
+                    'fileMap' => [
+                        //'main' => 'main.php',
+                    ],
+                ],
+            ],
+        ],
         'request' => [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'ydZ8aMyTTnm1w_7Ur_A8RpOfKx9la-Vf',
@@ -27,6 +66,7 @@ $config = [
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
+            'loginUrl'=>['auth/login'],
         ],
         'errorHandler' => [
             'errorAction' => 'site/error',
@@ -59,7 +99,12 @@ $config = [
             'showScriptName' => false,
             'rules' => [
                 '' => 'site/index',
-                '<action>'=>'site/<action>',
+                'category/<id:\d+>/page/<page:\d+>' => 'category/view',
+                'category/<id:\d+>' => 'category/view',
+                'brand/<id:\d+>/page/<page:\d+>' => 'brand/view',
+                'brand/<id:\d+>' => 'brand/view',
+                'product/<id:\d+>' => 'product/view',
+                'search' => 'category/search',
             ],
         ],
         
