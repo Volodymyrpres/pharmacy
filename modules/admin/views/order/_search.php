@@ -29,7 +29,9 @@ use yii\widgets\ActiveForm;
 
     <?php // echo $form->field($model, 'delivery_id') ?>
 
-    <?php // echo $form->field($model, 'products') ?>
+    <?php // echo $form->field($model, 'qty') ?>
+
+    <?php // echo $form->field($model, 'sum') ?>
 
     <?php // echo $form->field($model, 'comments') ?>
 

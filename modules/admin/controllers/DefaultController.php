@@ -1,7 +1,11 @@
 <?php
 
 namespace app\modules\admin\controllers;
-
+use app\models\Product;
+use app\models\Cart;
+use app\models\Order;
+use app\models\OrderItem;
+use Yii;
 use yii\web\Controller;
 
 /**
@@ -15,6 +19,8 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        return $this->render('index');
+        $order = OrderItem::find()->all();;
+
+        return $this->render('index', compact('order'));
     }
 }

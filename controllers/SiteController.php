@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Category;
 use app\models\Product;
 use Yii;
 use yii\filters\AccessControl;
@@ -65,10 +66,14 @@ class SiteController extends Controller
     {
         $brands = Brand::find()->all();
         $popular = Product::find()->where(['product_id' => '1'])->limit(6)->all();
+        $slider = Product::find()->where(['product_id' => '1'])->limit(3)->all();
+
 
         return $this->render('index', [
             'brands' => $brands,
             'popular' => $popular,
+            'slider' => $slider,
+
         ]);
     }
 

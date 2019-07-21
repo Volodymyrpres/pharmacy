@@ -4,6 +4,7 @@ use yii\widgets\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+$currency =  \app\models\Setting::getSetting('currency');
 ?>
 
 <section>
@@ -42,7 +43,7 @@ use yii\helpers\Url;
                                         <a href="<?= \yii\helpers\Url::to(['product/view',  'id' => $product->id]) ?>">
                                             <img src="<?= \Yii::$app->imagemanager->getImagePath($product->image, 200,200) ?>" alt="" />
 
-                                            <h2>$<?= $product->price ?></h2>
+                                            <h2><?= $product->price ?><?= $currency ?></h2>
                                             <p><?= $product->name?></p></a>
                                         <a href="<?= yii\helpers\Url::to(['cart/add', 'id' => $product->id ]) ?>" data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>

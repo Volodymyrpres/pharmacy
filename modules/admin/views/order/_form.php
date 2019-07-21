@@ -24,7 +24,9 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'delivery_id')->textInput() ?>
 
-    <?= $form->field($model, 'products')->textarea(['rows' => 6]) ?>
+    <?= $form->field($model, 'qty')->textInput() ?>
+
+    <?= $form->field($model, 'sum')->textInput() ?>
 
     <?= $form->field($model, 'comments')->textarea(['rows' => 6]) ?>
 

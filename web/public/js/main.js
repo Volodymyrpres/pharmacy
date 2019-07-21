@@ -42,6 +42,22 @@
 			}
 		});
 	});
+	$('.del-item-view').on('click', function(){
+		var id = $(this).data('id');
+		$.ajax({
+			url: '/cart/del-item-view',
+			data: {id: id},
+			type: 'GET',
+			success: function(res){
+				if(!res) alert('Ошибка!');
+				//console.log(res);
+				showCart(res);
+			},
+			error: function(){
+
+			}
+		});
+	});
 
 	function clearCart(){
 	$.ajax({

@@ -49,16 +49,16 @@ class CategoryController extends AppController
 
         $brands = Brand::find()->all();
 
-        $s = trim(Yii::$app->request->get('s'));
-        $this->setMeta('Pharmacy | Поиск:' . $s);
-        if(!$s)
+        $search = trim(Yii::$app->request->get('search'));
+        $this->setMeta('Pharmacy | Поиск:' . $search);
+        if(!$search)
             return $this->render('search');
-        $query = Product::find()->where(['like', 'name', $s]);
+        $query = Product::find()->where(['like', 'name', $search]);
         $pages = new Pagination(['totalCount' => $query->count(),
             'pageSize' => 3,
             'forcePageParam' => FALSE,
             'pageSizeParam' => FALSE]);
         $products = $query->offset($pages->offset)->limit($pages->limit)->all();
-        return $this->render('search', compact('products', 'pages', 's', 'brands'));
+        return $this->render('search', compact('products', 'pages', 'search', 'brands'));
     }
 }

@@ -1,0 +1,10 @@
+CREATE TABLE setting(
+    id INT NOT NULL AUTO_INCREMENT,
+    title VARCHAR (225) DEFAULT NULL,
+    email VARCHAR (225) DEFAULT NULL,
+    phones TEXT DEFAULT NULL,
+    logo VARCHAR (225) DEFAULT NULL,
+    currency VARCHAR (225) DEFAULT NULL,
+    type VARCHAR (225) DEFAULT 'site',
+    PRIMARY KEY (id)
+);

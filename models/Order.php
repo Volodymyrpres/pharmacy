@@ -2,7 +2,10 @@
 
 namespace app\models;
 
+use yii\db\ActiveRecord;
+use yii\behaviors\TimestampBehavior;
 use Yii;
+use yii\db\Expression;
 
 /**
  * This is the model class for table "order".
@@ -14,12 +17,13 @@ use Yii;
  * @property string $telephone
  * @property string $payment
  * @property string $delivery_id
- * @property string $products
+ * @property string $qty
+ * @property string $sum
  * @property string $comments
  * @property string $status_id
  * @property string $date_create
  */
-class Order extends \yii\db\ActiveRecord
+class Order extends ActiveRecord
 {
     /**
      * {@inheritdoc}
@@ -29,14 +33,34 @@ class Order extends \yii\db\ActiveRecord
         return 'order';
     }
 
+    public function behaviors() {
+        return [
+            [
+                'class' => TimestampBehavior::className(),
+                'attributes' => [
+                    ActiveRecord::EVENT_BEFORE_INSERT => ['date_create'],
+//                    ActiveRecord::EVENT_BEFORE_UPDATE => ['updated_at'],
+                ],
+                // если вместо метки времени UNIX используется datetime:
+                'value' => new Expression('NOW()'),
+            ],
+        ];
+    }
+
+    public function getOrderItems() {
+        return $this->hasMany(OrderItems::className(), ['order_id' => 'id']);
+    }
+
     /**
      * {@inheritdoc}
      */
     public function rules()
     {
         return [
-            [['payment', 'products', 'comments'], 'string'],
-            [['delivery_id', 'status_id', 'date_create'], 'integer'],
+            [['name', 'surname', 'email', 'telephone'], 'required'],
+            [['payment', 'comments'], 'string'],
+            [['sum'], 'number'],
+            [['delivery_id', 'qty', 'status_id', 'date_create'], 'integer'],
             [['name', 'surname', 'email', 'telephone'], 'string', 'max' => 255],
         ];
     }
@@ -47,17 +71,18 @@ class Order extends \yii\db\ActiveRecord
     public function attributeLabels()
     {
         return [
-            'id' => 'ID',
-            'name' => 'Name',
-            'surname' => 'Surname',
-            'email' => 'Email',
-            'telephone' => 'Telephone',
-            'payment' => 'Payment',
-            'delivery_id' => 'Delivery ID',
-            'products' => 'Products',
-            'comments' => 'Comments',
-            'status_id' => 'Status ID',
-            'date_create' => 'Date Create',
+            //'id' => 'ID',
+            'name' => 'Имя',
+            'surname' => 'Фамилия',
+            'email' => 'E-mail',
+            'telephone' => 'Телефон',
+//            'payment' => 'Оплата',
+//            'delivery_id' => 'Доставка',
+            //'qty' => 'Qty',
+            //'sum' => 'Sum',
+            'comments' => 'Комментарий',
+            //'status_id' => 'Status ID',
+            //'date_create' => 'Date Create',
         ];
     }
 }

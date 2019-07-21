@@ -19,13 +19,14 @@ class BrandController extends AppController
 {
     public function actionView($id)
     {
+        //$id = Yii::$app->request->get('id');
         $brands = Brand::getBrands();
-        $id = Yii::$app->request->get('id');
+
 
         $query = Product::find()->where(['brand_id' => $id]);
 
-        $brand = Brand::findOne($id);
-        if(empty($brand))
+        $brandone = Brand::findOne($id);
+        if(empty($brandone))
             throw new \yii\web\HttpException(404, 'Выбранного бренда не существует');
 
         $pages = new Pagination(['totalCount' => $query->count(),
@@ -36,11 +37,11 @@ class BrandController extends AppController
 
 
 
-        $this->setMeta('Pharmacy | ' . $brand->name, $brand->meta_description);
+        $this->setMeta('Pharmacy | ' . $brandone->name, $brandone->meta_description);
 
         return $this->render('view', [
             'products' => $products,
-            'brand' => $brand,
+            'brandone' => $brandone,
             'brands' => $brands,
             'pages' => $pages,
         ]);

@@ -4,6 +4,7 @@ use yii\widgets\LinkPager;
 use yii\helpers\Html;
 use yii\helpers\Url;
 
+$currency =  \app\models\Setting::getSetting('currency');
 ?>
 
 <section>
@@ -32,7 +33,7 @@ use yii\helpers\Url;
 
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center"><?= $brand->name  ?></h2>
+                    <h2 class="title text-center"><?= $brandone->name  ?></h2>
                     <?php $i = 0; foreach ($products as $product): ?>
                         <div class="col-sm-4">
                             <div class="product-image-wrapper">
@@ -41,7 +42,7 @@ use yii\helpers\Url;
                                         <a href="<?= \yii\helpers\Url::to(['product/view',  'id' => $product->id]) ?>">
                                             <img src="<?= \Yii::$app->imagemanager->getImagePath($product->image, 250,250) ?>" alt="" />
 
-                                        <h2>$<?= $product->price ?></h2>
+                                        <h2><?= $product->price?><?= $currency ?></h2>
                                         <p><?= $product->name?></p></a>
                                         <a href="<?=\yii\helpers\Url::to(['cart/add',  'id' => $product->id]) ?>" data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
                                     </div>

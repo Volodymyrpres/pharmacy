@@ -50,17 +50,10 @@ array_walk($list, function($model) use (&$brands){
 
     <?= $form->field($model, 'promotions_id')->textInput() ?>
 
-    <?= $form->field($model, 'category_id')->dropDownList($categories,[
-            'prompt' => '...',
-            'class' => 'custom-select'
-        ]
-    )->label(); ?>
+    <?= $form->field($model, 'category_id')->dropDownList($categories)->label(); ?>
 
-    <?= $form->field($model, 'brand_id')->dropDownList($brands,[
-            'prompt' => '...',
-            'class' => 'custom-select'
-        ]
-    )->label(); ?>
+    <?= $form->field($model, 'brand_id')->dropDownList($brands)->label(); ?>
+
     <?= $form->field($model, 'new_price')->textInput() ?>
 
     <div class="form-group">
