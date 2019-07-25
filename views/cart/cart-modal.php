@@ -1,6 +1,6 @@
 <?php
 use yii\helpers\Html;
-
+$currency =  \app\models\Setting::getSetting('currency');
 
 ?>
 
@@ -22,7 +22,7 @@ use yii\helpers\Html;
                 <td><?= Html::img(\Yii::$app->imagemanager->getImagePath($item['image'], 50,50)) ?></td>
                 <td><?= $item['name'] ?></td>
                 <td><?= $item['qty'] ?></td>
-                <td><?= $item['price'] ?></td>
+                <td><?= $item['price'] ?><?= $currency ?></td>
                 <td><span data-id="<?= $id ?>" class="glyphicon glyphicon-remove text-danger del-item" aria-hidden="true"></span></td>
             </tr>
         <?php endforeach; ?>
@@ -32,7 +32,7 @@ use yii\helpers\Html;
         </tr>
         <tr>
             <td colspan="4">На сумму: </td>
-            <td><?= $session['cart.sum'] ?></td>
+            <td><?= $session['cart.sum'] ?><?= $currency ?></td>
         </tr>
         </tbody>
     </table>

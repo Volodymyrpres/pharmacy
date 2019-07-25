@@ -11,10 +11,11 @@ use yii\bootstrap\NavBar;
 use yii\widgets\Breadcrumbs;
 use app\assets\AppAsset;
 use app\assets\PublicAsset;
-$this->title = 'Pharmacy';
+//$this->title = 'Pharmacy';
 
 //AppAsset::register($this);
 PublicAsset::register($this);
+$img =  \app\models\Setting::getSetting('logo');
 $currency =  \app\models\Setting::getSetting('currency');
 $title =  \app\models\Setting::getSetting('title');
 ?>
@@ -38,20 +39,26 @@ $title =  \app\models\Setting::getSetting('title');
             <div class="row">
                 <div class="col-sm-6">
                     <div class="contactinfo">
-                        <ul class="nav nav-pills">
+                        <ul class="nav nav-pills navbar-nav">
                             <li><a href="#"><i class="fa fa-phone"></i> <?= \app\models\Setting::getSetting('phones');?></a></li>
                             <li><a href="#"><i class="fa fa-envelope"></i> <?= \app\models\Setting::getSetting('email');?></a></li>
+                            <li class="dropdown"><a href="#"><?= $currency ?><i class="fa fa-angle-down"></i></a>
+                                <ul role="menu" class="sub-menu">
+                                    <li><a href="#">Долар</a></li>
+                                    <li><a href="#">Евро</a></li>
+                                </ul>
+                            </li>
                         </ul>
                     </div>
                 </div>
-                <div class="col-sm-6">
+                <div class="col-sm-6" style=" padding-top: 8px; ">
                     <div class="social-icons pull-right">
                         <ul class="nav navbar-nav">
-                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
-                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
-                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
-                            <li><a href="#"><i class="fa fa-dribbble"></i></a></li>
-                            <li><a href="#"><i class="fa fa-google-plus"></i></a></li>
+                            <li><a href="https://www.facebook.com/"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="https://twitter.com/"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="https://www.linkedin.com/"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="https://dribbble.com/"><i class="fa fa-dribbble"></i></a></li>
+                            <li><a href="https://plus.google.com/"><i class="fa fa-google-plus"></i></a></li>
                         </ul>
                     </div>
                 </div>
@@ -64,30 +71,19 @@ $title =  \app\models\Setting::getSetting('title');
             <div class="row">
                 <div class="col-sm-4">
                     <div class="logo pull-left">
-                        <?php $img =  \app\models\Setting::getSetting('logo');?>
                         <a href="<?= \yii\helpers\Url::to(['site/index']) ?>"><img src="<?= \Yii::$app->imagemanager->getImagePath($img, 150,80) ?>" alt="" /></a>
                     </div>
-                    <div class="btn-group pull-right">
+                    <div class="btn-group">
 
 
-                        <div class="btn-group">
-                            <button type="button" class="btn btn-default dropdown-toggle usa" data-toggle="dropdown">
-                                <?= $currency ?>
-                                <span class="caret"></span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a href="#">Canadian Dollar</a></li>
-                                <li><a href="#">Pound</a></li>
-                            </ul>
-                        </div>
                     </div>
                 </div>
                 <div class="col-sm-8">
                     <div class="shop-menu pull-right">
                         <ul class="nav navbar-nav">
                             <?php if(Yii::$app->user->isGuest):?>
-                                <li><a href="<?= Url::toRoute(['auth/login'])?>"><i class="fa fa-crosshairs"></i>Login</a></li>
-                                <li><a href="<?= Url::toRoute(['auth/signup'])?>"><i class="fa fa-lock"></i>Register</a></li>
+                                <li><a href="<?= Url::toRoute(['auth/login'])?>"><i class="fa fa-crosshairs"></i>Авторизация</a></li>
+                                <li><a href="<?= Url::toRoute(['auth/signup'])?>"><i class="fa fa-lock"></i>Регистрация</a></li>
                             <?php else: ?>
                                 <?= Html::beginForm(['/auth/logout'], 'post')
                                 . Html::submitButton(
@@ -96,7 +92,7 @@ $title =  \app\models\Setting::getSetting('title');
                                 )
                                 . Html::endForm() ?>
                             <?php endif;?>
-                            <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i> Cart</a></li>
+                            <li><a href="#" onclick="return getCart()"><i class="fa fa-shopping-cart"></i>Корзина</a></li>
 
                         </ul>
                     </div>
@@ -119,24 +115,15 @@ $title =  \app\models\Setting::getSetting('title');
                     </div>
                     <div class="mainmenu pull-left">
                         <ul class="nav navbar-nav collapse navbar-collapse">
-                            <li><a href="<?= \yii\helpers\Url::to(['site/index']) ?>" class="active">Home</a></li>
-                            <li class="dropdown"><a href="#">Shop<i class="fa fa-angle-down"></i></a>
-                                <ul role="menu" class="sub-menu">
-                                    <li><a href="shop.html">Products</a></li>
-                                    <li><a href="product-details.html">Product Details</a></li>
-                                    <li><a href="checkout.html">Checkout</a></li>
-                                    <li><a href="cart.html">Cart</a></li>
-                                    <li><a href="login.html">Login</a></li>
-                                </ul>
-                            </li>
-                            <li><a href="contact-us.html">Contact</a></li>
+                            <li><a href="<?= \yii\helpers\Url::to(['site/index']) ?>" class="active">Главная</a></li>
+                            <li><a href="#contact">Контакты</a></li>
                         </ul>
                     </div>
                 </div>
                 <div class="col-sm-3">
                     <div class="search_box pull-right">
                         <form method="get" action="<?= Url::to(['category/search'])?>">
-                            <input type="text" placeholder="Search" name="search">
+                            <input type="text" placeholder="Поиск" name="search">
                         </form>
                     </div>
                 </div>
@@ -152,9 +139,10 @@ $title =  \app\models\Setting::getSetting('title');
         <div class="container">
             <div class="row">
                 <div class="col-sm-4">
-                    <div class="companyinfo">
+                    <div id="contact" class="companyinfo">
                         <h2><span><?= $title ?></span></h2>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit,sed do eiusmod tempor</p>
+                        <p><i class="fa fa-phone"></i> <?= \app\models\Setting::getSetting('phones');?></p>
+                        <p><i class="fa fa-envelope"></i> <?= \app\models\Setting::getSetting('email');?></p>
                     </div>
                 </div>
                 <div class="col-sm-4 ">
@@ -171,7 +159,7 @@ $title =  \app\models\Setting::getSetting('title');
         <div class="container">
             <div class="row">
                 <p class="pull-left">Copyright © 2019 <?= $title ?> Inc. All rights reserved.</p>
-                <p class="pull-right">Designed by <span><a target="_blank" href="http://www.themeum.com">Themeum</a></span></p>
+                <p class="pull-right">Designed by <span><a target="_blank" href="<?= \yii\helpers\Url::to(['site/index']) ?>"><?= $title ?></a></span></p>
             </div>
         </div>
     </div>

@@ -12,13 +12,13 @@ $currency =  \app\models\Setting::getSetting('currency');
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>Category</h2>
+                    <h2>Категории</h2>
                     <ul class="catalog category-products">
                         <?= \app\components\MenuWidget::widget(['tpl' => 'menu'])?>
                     </ul>
 
                     <div class="brands_products"><!--brands_products-->
-                        <h2>Brands</h2>
+                        <h2>Бренды</h2>
                         <div class="brands-name">
                             <ul class="nav nav-pills nav-stacked">
                                 <?php foreach ($brands as $brand): ?>
@@ -44,7 +44,7 @@ $currency =  \app\models\Setting::getSetting('currency');
 
                                         <h2><?= $product->price?><?= $currency ?></h2>
                                         <p><?= $product->name?></p></a>
-                                        <a href="<?=\yii\helpers\Url::to(['cart/add',  'id' => $product->id]) ?>" data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                        <a href="<?=\yii\helpers\Url::to(['cart/add',  'id' => $product->id]) ?>" data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добавить в корзину</a>
                                     </div>
 
                                 </div>

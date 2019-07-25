@@ -2,6 +2,8 @@
 use yii\helpers\Html;
 use yii\helpers\Url;
 use yii\widgets\ActiveForm;
+
+$currency =  \app\models\Setting::getSetting('currency');
 ?>
 <div class="container">
 
@@ -39,7 +41,7 @@ use yii\widgets\ActiveForm;
                         <td><?= Html::img(\Yii::$app->imagemanager->getImagePath($item['image'], 50,50)) ?></td>
                         <td><a href="<?= Url::to(['product/view', 'id' => $id]) ?>"><?= $item['name'] ?></a></td>
                         <td><?= $item['qty'] ?></td>
-                        <td><?= $item['price'] ?></td>
+                        <td><?= $item['price'] ?><?= $currency ?></td>
                         <td><?= $item['qty'] * $item['price']?></td>
                         <td><span data-id="<?= $id ?>" class="glyphicon glyphicon-remove text-danger del-item-view" aria-hidden="true"></span></td>
                     </tr>
@@ -50,7 +52,7 @@ use yii\widgets\ActiveForm;
                 </tr>
                 <tr>
                     <td colspan="5">На сумму: </td>
-                    <td><?= $session['cart.sum'] ?></td>
+                    <td><?= $session['cart.sum'] ?><?= $currency ?></td>
                 </tr>
                 </tbody>
             </table>

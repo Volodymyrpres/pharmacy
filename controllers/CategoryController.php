@@ -35,7 +35,7 @@ class CategoryController extends AppController
             'pageSizeParam' => FALSE]);
         $products = $query->offset($pages->offset)->limit($pages->limit)->all();
 
-        $this->setMeta('Pharmacy | ' . $category->name, $category->meta_description);
+        $this->setMeta('Pharmacy | ' . $category->name);
 
         return $this->render('view', [
             'products' => $products,

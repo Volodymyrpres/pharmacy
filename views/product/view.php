@@ -1,4 +1,6 @@
 <?php
+
+
 $currency =  \app\models\Setting::getSetting('currency');
 
 ?>
@@ -8,13 +10,13 @@ $currency =  \app\models\Setting::getSetting('currency');
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>Category</h2>
+                    <h2>Категории</h2>
                     <ul class="catalog category-products">
                         <?= \app\components\MenuWidget::widget(['tpl' => 'menu'])?>
                     </ul>
 
                     <div class="brands_products"><!--brands_products-->
-                        <h2>Brands</h2>
+                        <h2>Бренды</h2>
                         <div class="brands-name">
                             <ul class="nav nav-pills nav-stacked">
                                 <?php foreach ($brands as $brand): ?>
@@ -73,16 +75,16 @@ $currency =  \app\models\Setting::getSetting('currency');
                             <img src="images/product-details/rating.png" alt="" />
                             <span>
 									<span><?= $product->price ?><?= $currency ?></span>
-									<label>Quantity:</label>
+									<label>Количество:</label>
 									<input type="text" value="1" id="qty" />
 									<a href="<?= yii\helpers\Url::to(['cart/add', 'id' => $product->id ]) ?>" data-id="<?= $product->id ?>" class="btn btn-fefault cart add-to-cart">
 										<i class="fa fa-shopping-cart"></i>
-										Add to cart
+										Добавить в корзину
 									</a>
 								</span>
-                            <p><b>Availability:</b> In Stock</p>
-                            <p><b>Condition:</b> New</p>
-                            <p><b>Brand:</b> <a href="<?= \yii\helpers\Url::to(['brand/view',  'id' => $product->brand->id]) ?>"><?= $product->brand->name ?></a></p>
+                            <p><b>Наличие:</b> В наличии</p>
+                            <p><b>Состояние:</b> Новый</p>
+                            <p><b>Бренд:</b> <a href="<?= \yii\helpers\Url::to(['brand/view',  'id' => $product->brand->id]) ?>"><?= $product->brand->name ?></a></p>
                             <a href=""><img src="images/product-details/share.png" class="share img-responsive"  alt="" /></a>
                         </div><!--/product-information-->
                     </div>
@@ -91,8 +93,9 @@ $currency =  \app\models\Setting::getSetting('currency');
                 <div class="category-tab shop-details-tab"><!--category-tab-->
                     <div class="col-sm-12">
                         <ul class="nav nav-tabs">
-                            <li><a href="#details" data-toggle="tab">Details</a></li>
-                            <li class="active"><a href="#reviews" data-toggle="tab">Reviews (5)</a></li>
+                            <li><a href="#details" data-toggle="tab">Описание</a></li>
+                            <li class="active"><a href="#reviews" data-toggle="tab">Коментарии</a></li>
+
                         </ul>
                     </div>
                     <div class="tab-content">
@@ -102,23 +105,36 @@ $currency =  \app\models\Setting::getSetting('currency');
                         </div>
 
                         <div class="tab-pane fade active in" id="reviews" >
-                            <div class="col-sm-12">
-                                <p><b>Написать коментарий</b></p>
+                            <?php if(!empty($comments)):?>
+                            <?php foreach($comments as $comment):?>
+                                <div class="bottom-comment"><!--bottom comment-->
 
-                                <form action="#">
-                                    <textarea name="" ></textarea>
-                                    <button type="button" class="btn btn-default pull-right">
-                                        Submit
-                                    </button>
-                                </form>
+                                    <div class="comment-text">
+                                        <h5><?= $comment->user->name; ?></h5>
+
+
+                                        <p class="para"><?= $comment->text; ?></p>
+                                    </div>
+                                </div>
+                            <?php endforeach;?>
+                            <?php endif;?>
+                            <?php $form = \yii\widgets\ActiveForm::begin([
+                                'action'=>['product/comment', 'id'=>$product->id],
+                                'options'=>['class'=>'form-horizontal contact-form', 'role'=>'form']])?>
+                            <div class="form-group">
+                                <div class="col-md-12">
+                                    <?= $form->field($commentForm, 'comment')->textarea(['class'=>'form-control','placeholder'=>'Напишите сообщение'])->label(false)?>
+                                </div>
                             </div>
+                            <button type="submit" class="btn send-btn">Оставьте комментарий</button>
+                            <?php \yii\widgets\ActiveForm::end();?>
                         </div>
 
                     </div>
                 </div><!--/category-tab-->
 
                 <div class="recommended_items"><!--recommended_items-->
-                    <h2 class="title text-center">recommended items</h2>
+                    <h2 class="title text-center">Рекомендованые товары</h2>
 
                     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
@@ -130,10 +146,11 @@ $currency =  \app\models\Setting::getSetting('currency');
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <img src="<?= \Yii::$app->imagemanager->getImagePath($populars->image, 300,300, 'center:center') ?>" alt="" />
+                                                <a href="<?= \yii\helpers\Url::to(['product/view',  'id' => $populars->id]) ?>">
+                                                <img src="<?= \Yii::$app->imagemanager->getImagePath($populars->image, 300,300, 'center:center') ?>" alt="" /></a>
                                                 <h2><?= $product->price ?><?= $currency ?></h2>
                                                 <p><?= $populars->name ?></p>
-                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</button>
+                                                <button type="button" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добавить в корзину</button>
                                             </div>
                                         </div>
                                     </div>

@@ -1,5 +1,6 @@
 <?php
 $currency =  \app\models\Setting::getSetting('currency');
+$title =  \app\models\Setting::getSetting('title');
 ?>
 
 
@@ -20,13 +21,13 @@ $currency =  \app\models\Setting::getSetting('currency');
                         <div class="item <?php if($i == 0) echo 'active' ?>">
                         <?php endif ?>
                             <div class="col-sm-6">
-                                <h1><span>P</span>harmacy</h1>
+                                <h1><span><?= $title ?></span></h1>
                                 <h2><?= $sliders->name?></h2>
                                 <h2><?= $sliders->price?><?= $currency ?></h2>
-                                <a href="<?=\yii\helpers\Url::to(['cart/add',  'id' => $sliders->id]) ?>" data-id="<?= $sliders->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                <a href="<?=\yii\helpers\Url::to(['cart/add',  'id' => $sliders->id]) ?>" data-id="<?= $sliders->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добавить в корзину</a>
                             </div>
                             <div class="col-sm-6">
-                                <a href="<?= \yii\helpers\Url::to(['product/view',  'id' => $product->id]) ?>">
+                                <a href="<?= \yii\helpers\Url::to(['product/view',  'id' => $sliders->id]) ?>">
                                     <img src="<?= \Yii::$app->imagemanager->getImagePath($sliders->image, 300,300, 'center:center') ?>" class="girl img-responsive" alt="" /></a>
                             </div>
                             <?php $i++; if($i % 1 == 0 || $i == $count): ?>
@@ -53,12 +54,12 @@ $currency =  \app\models\Setting::getSetting('currency');
         <div class="row">
             <div class="col-sm-3">
                 <div class="left-sidebar">
-                    <h2>Category</h2>
+                    <h2>Категории</h2>
                     <ul class="catalog category-products">
                     <?= \app\components\MenuWidget::widget(['tpl' => 'menu'])?>
                     </ul>
                     <div class="brands_products"><!--brands_products-->
-                        <h2>Brands</h2>
+                        <h2>Бренды</h2>
                         <div class="brands-name">
                             <ul class="nav nav-pills nav-stacked">
                                 <?php foreach ($brands as $brand): ?>
@@ -73,7 +74,7 @@ $currency =  \app\models\Setting::getSetting('currency');
 
             <div class="col-sm-9 padding-right">
                 <div class="features_items"><!--features_items-->
-                    <h2 class="title text-center">Features Items</h2>
+                    <h2 class="title text-center">Популярные товары</h2>
                     <?php foreach ($popular as $product): ?>
                     <div class="col-sm-4">
                         <div class="product-image-wrapper">
@@ -84,7 +85,7 @@ $currency =  \app\models\Setting::getSetting('currency');
 
                                     <h2><?= $product->price?><?= $currency ?></h2>
                                     <p><?= $product->name?></p></a>
-                                    <a href="<?=\yii\helpers\Url::to(['cart/add',  'id' => $product->id]) ?>" data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                                    <a href="<?=\yii\helpers\Url::to(['cart/add',  'id' => $product->id]) ?>" data-id="<?= $product->id ?>" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Добавить в корзину</a>
 
                                 </div>
 
@@ -97,7 +98,7 @@ $currency =  \app\models\Setting::getSetting('currency');
                 </div><!--features_items-->
 
                 <div class="recommended_items"><!--recommended_items-->
-                    <h2 class="title text-center">recommended items</h2>
+                    <h2 class="title text-center">Рекомендованые товары</h2>
 
                     <div id="recommended-item-carousel" class="carousel slide" data-ride="carousel">
                         <div class="carousel-inner">
@@ -109,13 +110,13 @@ $currency =  \app\models\Setting::getSetting('currency');
                                     <div class="product-image-wrapper">
                                         <div class="single-products">
                                             <div class="productinfo text-center">
-                                                <a href="<?= \yii\helpers\Url::to(['product/view',  'id' => $product->id]) ?>">
+                                                <a href="<?= \yii\helpers\Url::to(['product/view',  'id' => $populars->id]) ?>">
                                                     <img src="<?= \Yii::$app->imagemanager->getImagePath($populars->image, 300,300, 'center:center') ?>"></a>
                                                 <h2>$<?= $product->price ?><?= $currency ?></h2>
                                                 <p><?= $populars->name ?></p>
                                                 <a href="<?= yii\helpers\Url::to(['cart/add', 'id' => $populars->id ]) ?>" data-id="<?= $populars->id ?>" class="btn btn-fefault cart add-to-cart">
                                                     <i class="fa fa-shopping-cart"></i>
-                                                    Add to cart
+                                                    Добавить в корзину
                                                 </a>
                                             </div>
 

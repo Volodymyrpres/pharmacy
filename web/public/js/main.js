@@ -42,6 +42,7 @@
 			}
 		});
 	});
+
 	$('.del-item-view').on('click', function(){
 		var id = $(this).data('id');
 		$.ajax({

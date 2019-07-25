@@ -12,7 +12,7 @@ use app\assets\AdminAsset;
 use yii\helpers\Url;
 use app\models\Order;
 
-
+$title =  \app\models\Setting::getSetting('title');
 $order_count = Order::find()->where(['status_id' => 1])->count();
 AdminAsset::register($this);
 ?>
@@ -100,7 +100,7 @@ AdminAsset::register($this);
                     <a href="<?=Url::to(['/admin/product']);?>" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Товари</a>
                 </li>
                 <li>
-                    <a href="<?=Url::to(['/admin/promotions']);?>" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Акції</a>
+                    <a href="<?=Url::to(['/admin/comment']);?>" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Коментарії</a>
                 </li>
                 <li>
                     <a href="<?=Url::to(['/admin/user']);?>" class="waves-effect"><i class="fa fa-user fa-fw" aria-hidden="true"></i>Користувач</a>
@@ -123,10 +123,12 @@ AdminAsset::register($this);
         <div class="container-fluid">
             <div class="row bg-title">
                 <div class="col-lg-3 col-md-4 col-sm-4 col-xs-12">
-                    <h4 class="page-title">Dashboard</h4> </div>
+                    <h4 class="page-title"><?= Html::encode($this->title) ?></h4> </div>
                 <div class="col-lg-9 col-sm-8 col-md-8 col-xs-12">
                     <ol class="breadcrumb">
-                        <li><a href="#">Dashboard</a></li>
+                        <li><li><?= Breadcrumbs::widget([
+                                'links' => isset($this->params['breadcrumbs']) ? $this->params['breadcrumbs'] : [],
+                            ]) ?></li>
                     </ol>
                 </div>
                 <!-- /.col-lg-12 -->
@@ -146,7 +148,7 @@ AdminAsset::register($this);
 </div>
 </div>
 <!-- /.container-fluid -->
-<footer class="footer text-center"> 2017 &copy; Ample Admin brought to you by wrappixel.com </footer>
+<footer class="footer text-center"> 2019 &copy; Ample Admin brought to you by <a href="<?= \yii\helpers\Url::to(['pharmacy/']) ?>"><?= $title ?></a> </footer>
 </div>
 <!-- ============================================================== -->
 <!-- End Page Content -->

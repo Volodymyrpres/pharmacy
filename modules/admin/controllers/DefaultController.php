@@ -8,6 +8,7 @@ use app\models\OrderItem;
 use Yii;
 use yii\web\Controller;
 
+
 /**
  * Default controller for the `admin` module
  */
@@ -19,7 +20,8 @@ class DefaultController extends Controller
      */
     public function actionIndex()
     {
-        $order = OrderItem::find()->all();;
+        $order = OrderItem::find()->all();
+
 
         return $this->render('index', compact('order'));
     }

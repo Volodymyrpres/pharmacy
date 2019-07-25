@@ -4,7 +4,7 @@
 /* @var $model app\models\LoginForm */
 use yii\helpers\Html;
 use yii\bootstrap\ActiveForm;
-$this->title = 'Register';
+$this->title = 'Регистрация';
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="leave-comment mr0"><!--leave comment-->
@@ -13,7 +13,7 @@ $this->params['breadcrumbs'][] = $this->title;
             <div class="site-login">
                 <h1><?= Html::encode($this->title) ?></h1>
 
-                <p>Please fill out the following fields to register:</p>
+                <p>Пожалуйста, заполните следующие поля, чтобы зарегистрироваться:</p>
 
                 <?php $form = ActiveForm::begin([
                     'id' => 'login-form',
@@ -24,15 +24,15 @@ $this->params['breadcrumbs'][] = $this->title;
                     ],
                 ]); ?>
 
-                <?= $form->field($model, 'name')->textInput(['autofocus' => true]) ?>
+                <?= $form->field($model, 'name')->textInput(['autofocus' => true])->label('Имя') ?>
 
-                <?= $form->field($model, 'email')->textInput() ?>
+                <?= $form->field($model, 'email')->textInput()->label('Email') ?>
 
-                <?= $form->field($model, 'password')->passwordInput() ?>
+                <?= $form->field($model, 'password')->passwordInput()->label('Пароль') ?>
 
                 <div class="form-group">
                     <div class="col-lg-offset-1 col-lg-11">
-                        <?= Html::submitButton('Register', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
+                        <?= Html::submitButton('Регистрация', ['class' => 'btn btn-primary', 'name' => 'login-button']) ?>
                     </div>
                 </div>
 

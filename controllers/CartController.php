@@ -16,6 +16,7 @@ use Yii;
 class CartController extends AppController
 {
     public  $status_id = 1;
+
     public function actionAdd()
     {
         $id = Yii::$app->request->get('id');

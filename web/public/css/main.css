@@ -101,9 +101,7 @@ a#scrollUp i{
   background: none repeat scroll 0 0 #F0F0E9;
 }
 
-.contactinfo ul li:first-child{
-    margin-left: -15px;
-}
+
 
 .contactinfo ul li a{
   font-size: 12px;
@@ -324,7 +322,7 @@ ul.sub-menu {
 	list-style: none;
 	padding: 0;
 	margin: 0;
-	width: 220px;
+	width: 150px;
 	-webkit-box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 3px 3px rgba(0, 0, 0, 0.1);
 	display: none;
@@ -1083,6 +1081,10 @@ h2.title {
 }
 
 .del-item{
+  cursor: pointer;
+}
+
+.del-item-view{
   cursor: pointer;
 }
 

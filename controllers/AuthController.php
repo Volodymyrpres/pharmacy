@@ -5,6 +5,7 @@ use app\models\SignupForm;
 use app\models\User;
 use Yii;
 use yii\web\Controller;
+
 class AuthController extends Controller
 {
     public function actionLogin()
