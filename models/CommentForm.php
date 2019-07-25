@@ -20,7 +20,6 @@ class CommentForm extends Model
         $comment->text = $this->comment;
         $comment->user_id = Yii::$app->user->id;
         $comment->product_id = $product_id;
-        $comment->status = 0;
         return $comment->save();
     }
 }
